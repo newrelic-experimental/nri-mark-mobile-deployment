@@ -49,17 +49,21 @@ Usage of ./nri-mark-mobile-deployment:
 | -accountId             | New Relic Account Id                                |                                |    X     |                                                                                  |
 | -apiKey                | New Relic User Key                                  |                                |    X     | https://docs.newrelic.com/docs/apis/intro-apis/new-relic-api-keys/#overview-keys |
 | -appConfigFile         | State file                                          | `./apps.json                   |          |                                                                                  |
-| -customAttributes      | Custom attributes attached to Change Descriptor     | {}                             |          | JSON Object (key/pair) string                                                    |
+| -customAttributes      | Custom attributes attached to Change Descriptor     | {}                             |          | JSON Object (key/value) string                                                   |
 | -discoverAppsSince     | NRQL `since` clause for App search                  | `3 months ago`                 |          | https://docs.newrelic.com/docs/nrql/nrql-syntax-clauses-functions/#sel-since     |
 | -discoverOnly          | Discover Apps and Versions, write config file, exit | `false`                        |          |                                                                                  |
 | -discoverVersionsSince | NRQL `since` clause for Release search              | `24 hours ago`                 |          | https://docs.newrelic.com/docs/nrql/nrql-syntax-clauses-functions/#sel-since     |
 | -logLevel              | Logging level                                       | INFO \| ERROR \| WARN \| DEBUG |   INFO   |                                                                                  | |
 
+### appConfigFile
+The application maintains state in `appConfigFile` and requires read/write permission here. There is no user maintained state in this file, it is a JSON representation of what the application knows with respect to Mobile Applications 
+and their released versions. The file is read on startup and written on exit to maintain the current state.
+
 ### discoverAppsSince
 Mobile Applications which have had no traffic in the past 3 months are removed from NRDB however the Mobile Events remain and are orphaned. Setting `-discoverAppsSince` beyond 3 months will trip on this and you'll see errors from
   `setDeployment` in the log as there is no Entity to Change Track against. The errors are harmless.
 
-### discoverAppSince
+### discoverVersionsSince
 New Change Tracking descriptors must have a timestamp +/- 24 hours from the time of _detection_
   - This means that old releases are unseen unless you modify `-discoverVersionsSince`
   - Any release older than 24 hours will have its `timestamp` set to the current time- probably not what you want

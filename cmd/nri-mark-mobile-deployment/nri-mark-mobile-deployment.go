@@ -206,6 +206,8 @@ func (a *App) setDeployment() {
       )
       if err != nil {
          slog.Error("setDeployment: error creating deployment", "error", err)
+         // TODO Detect the error that tells us the Application has aged out (no activity in the past 3 months) and remove the app from the config
+         // Skip further processing on this Application
          continue
       }
       slog.Info("setDeployment", "application", event.AppName, "version", event.AppVersion, "changeTrackingDeployment.EntityGuid", changeTrackingDeployment.EntityGUID)
