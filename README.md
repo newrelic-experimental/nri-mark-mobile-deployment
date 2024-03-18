@@ -23,6 +23,12 @@ There are several restrictions that apply to this process, all can be overridden
 - The application does not contain a scheduler, it runs once and exits. Our suggestion is to run it under `cron` or something similar at least every 12 hours
 
 ## Usage
+Under normal circumstances usage would look like this
+```bash
+./nri-mark-mobile-deployment -apiKey="<YOUR_NEWRELIC_USER_KEY>" -accountId=<YOUR_NEWRELIC_ACCOUNT_ID>
+```
+
+All command line parameters:
 ```bash
 ./nri-mark-mobile-deployment -help
 Usage of ./nri-mark-mobile-deployment:
