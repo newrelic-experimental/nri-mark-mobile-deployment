@@ -28,6 +28,11 @@ Under normal circumstances usage would look like this
 ./nri-mark-mobile-deployment -apiKey="<YOUR_NEWRELIC_USER_KEY>" -accountId=<YOUR_NEWRELIC_ACCOUNT_ID>
 ```
 
+An example crontab entry to run the application at 0 minutes past every 12th hour
+```cronexp
+0 */12 * * *  <full_path_to>/nri-mark-mobile-deployment -apiKey="<YOUR_API_KEY>" -accountId=<YOUR_ACCOUNT_ID>
+```
+
 All command line parameters:
 ```bash
 ./nri-mark-mobile-deployment -help
